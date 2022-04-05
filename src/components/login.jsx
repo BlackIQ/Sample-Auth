@@ -32,7 +32,7 @@ const Login = () => {
                                 <label className='form-label' htmlFor='pass'>رمز عبور</label>
                                 <input className='form-control form-control-lg' id='pass' type="password" placeholder='********' onChange={e => setPassword(e.target.value)}/>
                                 <br/>
-                                <p className='pointer text-primary'>رمز خود را فراموش کرده اید؟</p>
+                                <p className='pointer text-primary'><Link to='/reset'>رمز خود را فراموش کرده اید؟</Link></p>
                                 <button onClick={() => firebaseLogin(email, password)} type='type' className='btn btn-lg btn-primary w-100'>ورود</button>
                             </div>
                             <br/>
