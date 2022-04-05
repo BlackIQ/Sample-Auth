@@ -1,7 +1,22 @@
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {FaGoogle, FaLinkedin} from "react-icons/fa";
+import {useEffect, useState} from "react";
+import {firebaseLogin, auth, firebaseGoogle} from "../firebase/reactfire";
+import {useAuthState} from "react-firebase-hooks/auth";
 
 const Login = () => {
+    const [user, loading, error] = useAuthState(auth);
+
+    const history = useHistory();
+
+    const [email, setEmail] = useState([]);
+    const [password, setPassword] = useState([]);
+
+    useEffect(() => {
+        if (loading) return;
+        if (user) history.push('/');
+    }, [user, loading]);
+
     return (
         <div className='py-5 px-5'>
             <div className='row'>
@@ -10,18 +25,18 @@ const Login = () => {
                         <div className='p-4 shadow-3-strong'>
                             <h4 className='text-center'>ورود به حساب کاربری</h4>
                             <br/>
-                            <form>
+                            <div>
                                 <label className='form-label' htmlFor='email'>شماره همراه یا ایمیل</label>
-                                <input className='form-control form-control-lg' id='email' placeholder='amir@email.com'/>
+                                <input className='form-control form-control-lg' id='email' placeholder='amir@email.com' onChange={e => setEmail(e.target.value)}/>
                                 <br/>
                                 <label className='form-label' htmlFor='pass'>رمز عبور</label>
-                                <input className='form-control form-control-lg' id='pass' type="password" placeholder='********'/>
+                                <input className='form-control form-control-lg' id='pass' type="password" placeholder='********' onChange={e => setPassword(e.target.value)}/>
                                 <br/>
                                 <p className='pointer text-primary'>رمز خود را فراموش کرده اید؟</p>
-                                <button className='btn btn-lg btn-primary w-100'>ورود</button>
-                            </form>
+                                <button onClick={() => firebaseLogin(email, password)} type='type' className='btn btn-lg btn-primary w-100'>ورود</button>
+                            </div>
                             <br/>
-                            <button className='btn btn-lg btn-outline-primary w-100 rounded-3'>
+                            <button onClick={() => firebaseGoogle()} className='btn btn-lg btn-outline-primary w-100 rounded-3'>
                                 ورود با حساب گوگل
                                 &nbsp;
                                 <FaGoogle className='text-primary'/>
