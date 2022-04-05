@@ -1,7 +1,23 @@
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {FaGoogle, FaLinkedin} from "react-icons/fa";
+import {auth, firebaseGoogle, firebaseRegister} from "../firebase/reactfire";
+import {useEffect, useState} from "react";
+import {useAuthState} from "react-firebase-hooks/auth";
 
 const Register = () => {
+    const [user, loading, error] = useAuthState(auth);
+
+    const history = useHistory();
+
+    const [email, setEmail] = useState([]);
+    const [password, setPassword] = useState([]);
+    const [repeatPassword, setRepeatPassword] = useState([]);
+
+    useEffect(() => {
+        if (loading) return;
+        if (user) history.push('/');
+    }, [user, loading]);
+
     return (
         <div className='py-5 px-5'>
             <div className='row'>
@@ -16,20 +32,23 @@ const Register = () => {
                                 </span>
                             </div>
                             <br/>
-                            <form>
+                            <div>
                                 <label className='form-label' htmlFor='email'>شماره همراه یا ایمیل</label>
-                                <input className='form-control form-control-lg' id='email' placeholder='amir@email.com'/>
+                                <input className='form-control form-control-lg' id='email' placeholder='amir@email.com' onChange={e => setEmail(e.target.value)}/>
                                 <br/>
                                 <label className='form-label' htmlFor='pass'>رمز عبور</label>
-                                <input className='form-control form-control-lg' id='pass' type="password" placeholder='********'/>
+                                <input className='form-control form-control-lg' id='pass' type="password" placeholder='********' onChange={e => setPassword(e.target.value)}/>
                                 <br/>
                                 <label className='form-label' htmlFor='rpass'>تکرار رمز عبور</label>
-                                <input className='form-control form-control-lg' id='rpass' type="password" placeholder='********'/>
+                                <input className='form-control form-control-lg' id='rpass' type="password" placeholder='********' onChange={e => setRepeatPassword(e.target.value)}/>
                                 <br/>
-                                <button className='btn btn-lg btn-primary w-100'>ثبت نام</button>
-                            </form>
+                                <p className={password.length >= 6 ? 'text-success' : 'text-danger'}>حداقل 6 کارکتر داشته باشد</p>
+                                <p className={password !== '' && repeatPassword !== '' && password === repeatPassword ? 'text-success' : 'text-danger'}>رمز عبور یکسان باشد</p>
+                                <br/>
+                                <button onClick={() => firebaseRegister(email, password)} type='button' className='btn btn-lg btn-primary w-100'>ثبت نام</button>
+                            </div>
                             <br/>
-                            <button className='btn btn-lg btn-outline-primary w-100 rounded-3'>
+                            <button onClick={() => firebaseGoogle()} className='btn btn-lg btn-outline-primary w-100 rounded-3'>
                                 ورود با حساب گوگل
                                 &nbsp;
                                 <FaGoogle className='text-primary'/>
