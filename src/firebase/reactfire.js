@@ -5,6 +5,7 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
     GoogleAuthProvider,
+    sendPasswordResetEmail,
     getAuth,
     signOut,
 } from 'firebase/auth';
@@ -60,9 +61,20 @@ const firebaseGoogle = async () => {
     }
 }
 
+const firebaseReset = async (email) => {
+    try {
+        await sendPasswordResetEmail(auth, email);
+        alert('لینک بازیابی ارسال شد');
+    } catch (error) {
+        console.error(error);
+        alert(error.message);
+    }
+}
+
 export {
     firebaseRegister,
     firebaseLogout,
+    firebaseReset,
     firebaseGoogle,
     firebaseLogin,
     auth,
