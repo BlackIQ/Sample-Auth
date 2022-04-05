@@ -11,7 +11,7 @@ function App() {
             <Navbar/>
             <div className='container py-4'>
                 <Switch>
-                    <Route exact path='/home'><Home/></Route>
+                    <Route exact path='/'><Home/></Route>
                     <Route exact path='/login'><Login/></Route>
                     <Route exact path='/register'><Register/></Route>
                 </Switch>
