@@ -12,10 +12,10 @@ const Login = () => {
                             <br/>
                             <form>
                                 <label className='form-label' htmlFor='email'>شماره همراه یا ایمیل</label>
-                                <input className='form-control form-control-lg' id='email' placeholder='amir@email.con'/>
+                                <input className='form-control form-control-lg' id='email' placeholder='amir@email.com'/>
                                 <br/>
-                                <label className='form-label' htmlFor='email'>شماره همراه یا ایمیل</label>
-                                <input className='form-control form-control-lg' id='email' placeholder='amir@email.con'/>
+                                <label className='form-label' htmlFor='pass'>رمز عبور</label>
+                                <input className='form-control form-control-lg' id='pass' type="password" placeholder='********'/>
                                 <br/>
                                 <p className='pointer text-primary'>رمز خود را فراموش کرده اید؟</p>
                                 <button className='btn btn-lg btn-primary w-100'>ورود</button>
@@ -38,14 +38,14 @@ const Login = () => {
                             <div className='text-center'>
                                 هنوز عضو نشده اید؟
                                 &nbsp;
-                                <Link>ثبت نام کنید</Link>
+                                <Link to='/register' className='text-primary'>ثبت نام کنید</Link>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className='col-md-8'>
                     <div className='m-1 text-center'>
-                        <img src='https://faradars.org/theme/display/ilishop/media/login-main.svg' className='py-5'/>
+                        <img src='https://faradars.org/theme/display/ilishop/media/login-main.svg' className='py-5' alt='Image'/>
                     </div>
                 </div>
             </div>
