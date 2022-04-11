@@ -1,3 +1,3 @@
-# Sepid Auth
+# Sample Auth
 
-Sepid company wanted a sample Auth service same as Faradars and I did it.
+This is just a simple React Authentication service. Same as Faradars Auth page.

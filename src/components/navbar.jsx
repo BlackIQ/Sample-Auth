@@ -4,7 +4,7 @@ const Navbar = () => {
     return (
         <nav className='navbar navbar-dark bg-dark shadow-0'>
             <div className='container px-lg-5'>
-                <Link className='navbar-brand'>فرادرس</Link>
+                <Link className='navbar-brand'>احراز هویت</Link>
             </div>
         </nav>
     );
